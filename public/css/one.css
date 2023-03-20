@@ -1,0 +1,110 @@
+html {
+    background-image: linear-gradient( black black);
+    background-attachment: fixed;
+}
+
+.satu {
+    font-family: 'Aclonica';
+    font-size: 25px;
+    text-decoration: none;
+    color: #0D5AB9;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.dua {
+    padding-top: 40px;
+}
+
+.dua img {
+    border-radius: 20px;
+    margin-left: 200px;
+    height: 400px;
+    width: 70%;
+}
+
+.tiga {
+    text-align: left;
+    margin-top: -130px;
+    color: white;
+    margin-left: 200px;
+}
+
+.tiga h2 {
+    font-weight: bold;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 20px;
+    margin-left: 110px;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    text-align: center;
+}
+
+.grid-item h5 {
+    font-weight: bold;
+}
+
+.grid-container2 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 15px;
+    margin-left: 170px;
+}
+
+.grid-item2 {
+    background-color: transparent;
+    padding: 15px;
+    text-align: center;
+}
+
+.grid-item2 h5 {
+    font-weight: bold;
+}
+
+.tiga1 {
+    text-align: left;
+    margin-top: -140px;
+    color: white;
+    margin-left: 6px;
+    padding-bottom: 20em;
+}
+
+.grid-container3 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: -300px;
+    margin-left: 110px;
+}
+
+.grid-item3 {
+    background-color: transparent;
+    padding: 15px;
+    text-align: center;
+}
+
+.grid-item3 h5 {
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: -250px;
+}
+
+strong {
+    margin-left: 130px;
+    font-size: larger;
+}
+
+i {
+    margin-left: 130px;
+}
+.bawah{
+    margin-top: -200px;
+}

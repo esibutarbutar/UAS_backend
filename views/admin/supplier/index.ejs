@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacation Tour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+    <link rel="stylesheet" href="/public/css/two.css">
+    <link rel="stylesheet" href="https://www.unpkg.com/bulma@0.9.3/css/bulma.css">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-brand"></div>
+            <a href="/" class="satu">VacaTionTouR <img src="/public/img/coconut.png" width="30px" height="25px"></a>
+                <% if (user) { %>
+                    <a class="nav" href="/admin/product">Penginapan</a>
+                    <a class="nav" href="/admin/supplier">Penyedia</a>
+                    <a class="nav" href="/admin/pesan">Pesan</a>
+
+                <% } %>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                <div class="cari">
+                    <form class="d-flex">
+                        <input class="form-control me-2 is-small" type="search" placeholder="Search" aria-label="Search">
+                            <button id="search" class="btn btn-outline-primary is-small" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="mx-3" id="userEmail">
+                            <%= user.email %>
+                        </div>
+                        <div class="buttons">
+                            <%- (!user ? '<a href="/user/login" class="btn btn-primary">Login</a>' : '<a href="/user/logout" id="btnlogout" class="btn btn-primary" onclick="loadLogout()">Logout</a>') %>
+                            <button id="btnload" class="button is-loading" style="display: none; width: 150px;"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="app" class="container is-max-widescreen">
+        <h1 class="title mt-5">List of Suppliers</h1>
+        <div>
+            
+            <table class="table is-striped is-bordered mt-3 is-fullwidth" style="margin:10px auto;">
+                <thead class="table-info">
+                    <tr>
+                        <th>Nama Pemilik</th>
+                        <th>Kontak</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Created By</th>
+                        <th>Updated By</th>
+                        <% if (user.isAdmin) { %>
+                            <th class="has-text-centered">Actions</th>                         
+                        <% } %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% suppliers.forEach(el=> { %>
+                        <tr>
+                            <td><%= el.supplier_name %></td>
+                            <td><%= el.contact_name %></td>
+                            <td><%= el.email %></td>
+                            <td><%= el.phone %></td>
+                            <td><%= el.createdBy %></td>
+                            <td><%= el.updatedBy %></td>
+                            <% if (user.isAdmin) { %>
+                                <td class="has-text-centered">
+                                    <a href="/admin/supplier/edit/<%= el.id %>" class="btn btn-primary is-small">Edit</a>
+                                    <button onclick=<%='del(' +el.id+ ')' %> class="btn btn-danger is-small" style="margin-left: 5px;">Delete</a>
+                                </td>
+                            <% } %>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <% if (user.isAdmin) { %>
+                <a href="/admin/supplier/create" class="btn btn-primary">Add New</a>       
+            <% } %>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://bulmajs.tomerbe.co.uk/assets/bulmajs/0.10/dist/bulma.js"></script>
+    <script>
+        let del = (id) => {
+            Bulma.create('alert', {
+                type: 'warning',
+                title: 'Data ' +id+ ' akan dihapus',
+                body: 'Apakah anda yakin akan menghapus data ' +id+ '?',
+                closable: true,
+                confirm: {
+                    label: 'Yakin',
+                    classes: ['is-primary'],
+                    onClick: function() {
+                        axios.delete('/admin/supplier/api/supplier/' + id).then((result) => {
+                            Bulma.create('alert', {
+                                type: 'success',
+                                title: 'Info status: ' + result.status,
+                                body: 'Great, Data BERHASIL dihapus!',
+                                confirm: {
+                                    label: 'Okay!',
+                                    classes: ['columns', 'column', 'is-2', 'is-offset-5'],
+                                    onClick: function() {
+                                        location.reload();
+                                    },
+                                },
+                            })
+                            // alert('Info status: ' + result.status)
+                            // location.reload();
+                        }).catch((err) => {
+                            alert('error ' + err)
+                        });
+                    },
+                },
+                cancel: {
+                    label: 'Cancel',
+                    classes: ['is-danger', 'is-outlined']
+                }
+            })
+        }
+        let loadLogout = () => {
+            document.getElementById('btnlogout').style.display = "none"
+            document.getElementById('userEmail').style.display = "none"
+            document.getElementById('btnload').style.display = "block"
+            alert("Berhasil Logout. Anda akan dialihkan ke halaman Home")
+        }
+    </script>
+</body>
+</html>

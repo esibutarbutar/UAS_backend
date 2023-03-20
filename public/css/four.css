@@ -1,0 +1,32 @@
+.kotak{
+    height: 500px;
+    width: 35%;
+    background-color: #0D5AB9;
+    margin-left: 400px;
+    padding-top: 50px;
+    margin-top: 30px;
+    border-radius: 20px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.kotak h1{
+    font-family: 'Aclonica';font-size: 25px;
+    color: white;
+    text-align: center;
+    padding-bottom: 40px;
+}
+.satu{
+    font-family: 'Aclonica';font-size: 25px;
+    text-decoration: none;
+    color: #0D5AB9;
+    margin-left: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.bawah{
+    margin-top: 120px;
+    margin-left: 225px;
+}
+.control a{
+    margin-left: 10px;
+}
